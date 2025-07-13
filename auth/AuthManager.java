@@ -2,6 +2,8 @@ package plasma.auth;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
+
+import io.github.cdimascio.dotenv.Dotenv;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 import org.apache.commons.codec.binary.Base64;
@@ -26,9 +28,12 @@ import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 public class AuthManager {
-    private static final String CLIENT_ID = "d1956a33-cca4-4042-8a7b-b2d4e111f3d0";
-    private static final String SCOPE = "XboxLive.signin offline_access";
-    private static final String REDIRECT_URI = "http://localhost:8888";
+	  	private static final Dotenv dotenv = Dotenv.load();
+	    private static final String CLIENT_ID = dotenv.get("CLIENT_ID");
+	    private static final String SCOPE = dotenv.get("SCOPE");
+	    private static final String REDIRECT_URI = dotenv.get("REDIRECT_URI");
+    
+    
     private static final String TOKEN_URL = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
     private static final String AUTH_URL = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize";
     private static final String XBOX_AUTH_URL = "https://user.auth.xboxlive.com/user/authenticate";
